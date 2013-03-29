@@ -1,30 +1,56 @@
-node-template
+dojo-socketio
 =============
 
-A template for nodejs projects that uses javascript. Mainly this is about build system, etc.
+A codebase to use for HuskyCode's dojo. These topics are planned to be covered.
+
+- HTTP module Server/Client
+- Events
+- Socket IO
+- Basic TDD
 
 How to Install NodeJS
----
+---------------------
 
-Refer to [INSTALL.md](INSTALL.md)
+Refer to [INSTALL.md](https://raw.github.com/huskycode/node-template/master/INSTALL.md)
 
-Using this Template
----
+Resources
+--------
 
-### Build Targets
-* All build targets can be found in [build/make.coffee](build/make.coffee)
-* Uses shelljs for platform compatibility
-* Copy build/ directory, run, run.bat to a new project
-* If you add new target that could be useful, please commit it back to this project
+#### HTTP
 
-### Run Build Targets
-* For all platform, make sure node is installed as instructed above
-* For Ubuntu/OS X, uses 
- 
-    ./run \<target_name\>
+```CoffeeScript
+http = require('http')
+http.createServer([requestListener]) #Returns a new web server object.
+http.get(options, callback) #send request (method GET) to server.
+```
 
-* For Windows (work in progress...)
-  
-    run.bat \<target_name\>
+#### Response
 
+```CoffeeScript
+response.writeHead(statusCode, [reasonPhrase], [headers]) #Sends a response header to the request.
+response.write(chunk, [encoding]) #This sends a chunk of the response body.
+response.end([data], [encoding]) #This method signals to the server that response have been sent;
+```
 
+#### Message
+
+```CoffeeScript
+message.statusCode #HTTP (response) status code.
+message.setEncoding([encoding]) #Set the encoding for data emitted by the 'data' event.
+
+data: function (chunk) { }
+close: function () { }
+```
+
+#### Server
+
+```CoffeeScript
+server.listen(port, [hostname], [backlog], [callback]) #Begin accepting connections.
+server.close([callback]) #Stops the server from accepting new connections.
+
+request: function (request, response) { }
+connection: function (socket) { }
+close: function () { }
+connect: function (request, socket, head) { }
+clientError: function (exception, socket) { }
+```
